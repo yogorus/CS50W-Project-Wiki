@@ -36,9 +36,6 @@ def search(request):
     # Else return similar entries
     entries = filter(lambda entry: query.lower() in entry.lower(), util.list_entries())
     
-    # Check for substring in list items
-    
-    
     # Render items
     return render(request, 'encyclopedia/search.html', {
         'entries': entries
