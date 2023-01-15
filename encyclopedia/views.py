@@ -63,7 +63,35 @@ def create(request):
             util.save_entry(title, bytes(text, 'utf8'))
             # with open(f'./entries/{title}.md', 'w+') as file:
             #     file.write(text.strip())
+        
+        else:
+            return render(request, 'encyclopedia/create.html', {
+                'form' : form
+            })
 
     return render(request, "encyclopedia/create.html", {
         "form" : CreateEntryForm()
+    })
+
+def edit(request, entry):
+    if request.method == 'POST':
+        form = CreateEntryForm(request.POST)
+
+        if form.is_valid():
+            title = form.cleaned_data['title'].strip()
+            text = form.cleaned_data['text'].strip()
+            
+           # Write new entry file into entries directory
+            util.save_entry(title, bytes(text, 'utf8'))
+            return HttpResponseRedirect(reverse('wiki', kwargs={'entry': entry}))
+        return render(request, 'encyclopedia/edit.html', {
+            'form' : form
+        })
+
+    return render(request, 'encyclopedia/edit.html', {
+        "entry": entry,
+        "form": CreateEntryForm(initial={   # Set html value
+            'title': entry,                
+            'text': util.get_entry(entry)
+        })
     })
