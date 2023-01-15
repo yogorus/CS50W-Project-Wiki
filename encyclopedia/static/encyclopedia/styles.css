@@ -1,6 +1,7 @@
 body {
     margin: 0;
     background-color: white;
+    font-family: sans-serif;
 }
 
 code {
@@ -35,4 +36,17 @@ textarea {
 
 .sidebar h2 {
     margin-top: 5px;
+}
+
+button {
+    margin: 1em;
+    background-color: rgb(47, 125, 228);
+    color: rgb(224, 224, 224);
+    border: solid gray 1px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: rgb(77, 146, 224);
 }
