@@ -4,6 +4,7 @@ from django.urls import reverse
 from django import forms
 import markdown2
 
+from random import choice
 from . import util
 
 class CreateEntryForm(forms.Form):
@@ -95,3 +96,7 @@ def edit(request, entry):
             'text': util.get_entry(entry)
         })
     })
+
+def random(request):
+    entry = choice(util.list_entries())
+    return HttpResponseRedirect(reverse('wiki', kwargs={"entry": entry}))
