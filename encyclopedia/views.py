@@ -62,6 +62,7 @@ def create(request):
             
             # Write new entry file into entries directory
             util.save_entry(title, bytes(text, 'utf8'))
+            return HttpResponseRedirect(reverse('wiki', kwargs={'entry': title}))
             # with open(f'./entries/{title}.md', 'w+') as file:
             #     file.write(text.strip())
         
